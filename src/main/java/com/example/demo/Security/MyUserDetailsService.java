@@ -19,25 +19,16 @@ public class MyUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Account account =userRepository.findByEmail(name).orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Role role = Role.valueOf(account.getRole());
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        authorities.addAll(role.getAuthorities());
-
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-
-
-
-        // Build Spring Security user with both role and permissions
+        Account account = userRepository.findByName(username).orElseThrow(()
+                ->  new UsernameNotFoundException("User Not found"));;
         return org.springframework.security.core.userdetails.User
                 .withUsername(account.getUsername())
                 .password(account.getPassword())
                 .roles(account.getRole())
-                .build();
+                .build();;
     }
 }

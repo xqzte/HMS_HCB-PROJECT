@@ -1,6 +1,5 @@
 package com.example.demo.Entities;
 
-import com.example.demo.Entities.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,16 +17,7 @@ public class Account implements UserDetails {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String name;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(unique = true, nullable = false)
-    private String address;
-
-    @Column(unique = true, nullable = false)
-    private int phoneNo;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -42,14 +32,11 @@ public class Account implements UserDetails {
     public Account() {
     }
 
-    public Account(Long id, Role role, String password, int phoneNo, String address, String email, String name) {
+    public Account(Long id, Role role, String password,  String username) {
         this.id = id;
         this.role = role;
         this.password = password;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.email = email;
-        this.name = name;
+        this.username = username;
     }
 
     public Long getId() {
@@ -61,36 +48,16 @@ public class Account implements UserDetails {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(int phoneNo) {
-        this.phoneNo = phoneNo;
-    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -120,7 +87,7 @@ public class Account implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

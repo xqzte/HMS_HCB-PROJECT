@@ -3,6 +3,7 @@ package com.example.demo.Entities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ public enum Role {
     NURSE,
     ADMIN;
 
+
+//    private List<GrantedAuthority> permissions;
     private Set<Permissions> permissions;
 
     public Set<Permissions> getPermissions() {
@@ -46,4 +49,8 @@ public enum Role {
                 Permissions.ADMIN_MANAGE_APPOINTMENTS
         );
     }
+//
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return ;
+//    }
 }

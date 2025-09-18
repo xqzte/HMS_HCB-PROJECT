@@ -11,7 +11,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
+
     private LocalDate dateOfBirth;
     private String gender;
     private String medicalHistory;

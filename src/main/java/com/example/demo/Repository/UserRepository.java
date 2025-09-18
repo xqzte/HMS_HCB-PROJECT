@@ -10,4 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<Account, Long> {
+    void delete(Long id);
+
+    Account findByName(String username);
 }

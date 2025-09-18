@@ -36,8 +36,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // 2. Check if header is valid
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7); // remove "Bearer "
-            username = jwtProvider.extractUsername(token); // extract username from token
+            token = authHeader.substring(7);
+
+            try {
+                username = this.jwtProvider.extractUsername(token);
+            } catch (Exception e) {
+                System.out.println("Invalid Token");
+                throw new RuntimeException(e);
+            }
+
+            // remove "Bearer "
+           // extract username from token
         }
 
         // 3. Validate token and set authentication
